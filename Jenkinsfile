@@ -14,7 +14,7 @@
             }
           }
           environment {
-            PATH: "/apache-maven-3.9.9/bin:$PATH"
+            PATH: "/home/jenkins/apache-maven-3.9.9/bin:$PATH"
           }
            stage("maven build") {
             steps {
