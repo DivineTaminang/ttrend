@@ -125,15 +125,16 @@
                     echo '<------------- Docker Publish Started ------------>'
                     
                     withCredentials([usernamePassword(credentialsId: 'jfrogcreds-id', usernameVariable: 'JFROG_USER', passwordVariable: 'JFROG_PASSWORD')]) {
-                        sh "docker login ${registry} -u ${JFROG_USER} -p ${JFROG_PASSWORD}"
-                        sh "docker tag ${imageName}:${version} ${registry}/${imageName}:${version}"
-                        sh "docker push ${registry}/${imageName}:${version}"
+                        sh "docker login trialhbh694.jfrog.io -u ${JFROG_USER} -p ${JFROG_PASSWORD}"
+                        sh "docker tag ${imageName}:${version} trialhbh694.jfrog.io/${imageName}:${version}"
+                        sh "docker push trialhbh694.jfrog.io/${imageName}:${version}"
                     }
 
                     echo '<------------- Docker Publish Ended ------------->'
                 }
             }
         }
+
 
 
 
