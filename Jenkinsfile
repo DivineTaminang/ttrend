@@ -99,7 +99,7 @@
         stage("Docker Published") {
             steps {
                 script {
-                    docker.withRegistry(registry, 'jfrog_creds') {
+                    docker.withRegistry(registry, 'jfrogcreds-id') {
                         app.push()
                     }
                     echo '<----------- Docker Publish Ended ---------------->'
