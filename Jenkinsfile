@@ -86,28 +86,56 @@
         }
       }
 
-        stage("Docker Build") {
+        // stage("Docker Build") {
+        //     steps {
+        //         script {
+        //             echo '<------------- Docker Build is Started ------------>'
+        //             app = docker.build(imageName + ":" + version)
+        //             // app = sh 'docker build -t (imageName + ":" + version)
+
+        //             echo '<--------------- Docker Build Ends --------------->'
+        //         }
+        //     }
+        //}
+      
+        // stage("Docker Published") {
+        //     steps {
+        //         script {
+        //             docker.withRegistry(registry, 'jfrogcreds-id') {
+        //                 app.push()
+        //             }
+        //             echo '<----------- Docker Publish Ended ---------------->'
+        //         }
+        //     }
+        // }
+
+           stage("Docker Build") {
             steps {
                 script {
                     echo '<------------- Docker Build is Started ------------>'
-                    app = docker.build(imageName + ":" + version)
-                    // app = sh 'docker build -t (imageName + ":" + version)
-
+                    sh "docker build -t ${imageName}:${version} ."
                     echo '<--------------- Docker Build Ends --------------->'
                 }
             }
         }
 
-        stage("Docker Published") {
+           stage("Docker Publish") {
             steps {
                 script {
-                    docker.withRegistry(registry, 'jfrogcreds-id') {
-                        app.push()
+                    echo '<------------- Docker Publish Started ------------>'
+                    
+                    withCredentials([usernamePassword(credentialsId: 'jfrogcreds-id', usernameVariable: 'JFROG_USER', passwordVariable: 'JFROG_PASSWORD')]) {
+                        sh "docker login ${registry} -u ${JFROG_USER} -p ${JFROG_PASSWORD}"
+                        sh "docker tag ${imageName}:${version} ${registry}/${imageName}:${version}"
+                        sh "docker push ${registry}/${imageName}:${version}"
                     }
-                    echo '<----------- Docker Publish Ended ---------------->'
+
+                    echo '<------------- Docker Publish Ended ------------->'
                 }
             }
         }
+
+
 
         // stage("Kubernetes Deploy") {
         //     steps {
