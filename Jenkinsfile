@@ -1,5 +1,6 @@
   def registry = 'https://trialhbh694.jfrog.io'
   def imageName = 'mavine-docker-local/ttrend'
+  def Name = 'ttrend'
   def version = '2.1.2'
   pipeline {
         agent {
@@ -113,7 +114,7 @@
             steps {
                 script {
                     echo '<------------- Docker Build is Started ------------>'
-                    sh "docker build -t ${imageName}:${version} ."
+                    sh "docker build -t ${Name}:${version} ."
                     echo '<--------------- Docker Build Ends --------------->'
                 }
             }
@@ -126,14 +127,15 @@
                     
                     withCredentials([usernamePassword(credentialsId: 'jfrogcreds-id', usernameVariable: 'JFROG_USER', passwordVariable: 'JFROG_PASSWORD')]) {
                         sh "docker login trialhbh694.jfrog.io -u ${JFROG_USER} -p ${JFROG_PASSWORD}"
-                        sh "docker tag ${imageName}:${version} trialhbh694.jfrog.io/${imageName}:${version}"
-                        sh "docker push trialhbh694.jfrog.io/${imageName}:${version}"
+                        //sh "docker tag ${imageName}:${version} trialhbh694.jfrog.io/${imageName}:${version}"
+                        sh "docker tag ${Name}:${version}"
+                        sh "docker push ${Name}:${version}"
                     }
 
                     echo '<------------- Docker Publish Ended ------------->'
                 }
-            }
-        }
+             }
+         }
 
 
 
