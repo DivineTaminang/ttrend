@@ -1,15 +1,15 @@
   def registry = 'https://trialhbh694.jfrog.io'
   def imageName = 'mavine-docker-local/ttrend'
-  def version = '2.1.2'
-     environment {
-            PATH: "/opt/apache-maven-3.9.9/bin:$PATH"
-          }
+  def version = '2.1.2
   pipeline {
         agent {
            node {
                label 'slave-server' 
            }
         }
+          environment {
+            PATH: "/opt/apache-maven-3.9.9/bin:$PATH"
+          }
         stages {
            stage("source code check out") {
             steps {
