@@ -85,6 +85,48 @@
              }
         }
       }
+
+        stage("Docker Build") {
+            steps {
+                script {
+                    echo '<------------- Docker Build is Started ------------>'
+                    app = docker.build(imageName + ":" + version)
+                    echo '<--------------- Docker Build Ends --------------->'
+                }
+            }
+        }
+
+        stage("Docker Published") {
+            steps {
+                script {
+                    docker.withRegistry(registry, 'jfrog_creds') {
+                        app.push()
+                    }
+                    echo '<----------- Docker Publish Ended ---------------->'
+                }
+            }
+        }
+
+        // stage("Kubernetes Deploy") {
+        //     steps {
+        //         script {
+        //             echo '< ------------Kubernetes deploy started ----------------->'
+        //             sh './deploy.sh'
+        //             echo '< -------------Kubernetes deploy ended ------------------->'
+        //         }
+        //     }
+        // }
+
+        // stage("Deploy") {
+        //     steps {
+        //         script {
+        //             echo '< ------------Helm deploy started ----------------->'
+        //             sh 'helm install ttrend ttrend-0.1.0.tgz'
+        //             echo '< -------------Helm deploy ended ------------------->'
+        //         }
+        //     }
+        // }
+    }
   }
   }
-  //
+  
