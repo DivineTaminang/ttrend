@@ -46,7 +46,7 @@
                 scannerHome = tool 'sonar-scanner'
             }
             steps {
-                withSonarQubeEnv("mavine-sonarqube-server") {
+                withSonarQubeEnv("sonarqube") {
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
             }
