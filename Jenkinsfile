@@ -2,7 +2,7 @@
   def imageName = 'mavine-docker-local/ttrend'
   def version = '2.1.2'
      environment {
-            PATH: "/home/ubuntu/apache-maven-3.9.9/bin:$PATH"
+            PATH: "/opt/apache-maven-3.9.9/bin:$PATH"
           }
   pipeline {
         agent {
