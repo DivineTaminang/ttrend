@@ -53,7 +53,6 @@
         }
 
 
-       }
         //  stage("Quality Gate") {
         //     steps {
         //       timeout(time: 1, unit: 'HOURS') {
@@ -83,7 +82,7 @@
                      server.publishBuildInfo(buildInfo)
                      echo '<--------------- Jar Published Ended --------------->'  
             
-         
+             }
         }
       }
   }
