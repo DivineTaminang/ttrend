@@ -41,16 +41,16 @@
           //   }
 
 
-           stage("SonarQube analysis") {
-            environment {
-                scannerHome = tool 'sonar-scanner'
-            }
-            steps {
-                withSonarQubeEnv("sonarqube") {
-                    sh "${scannerHome}/bin/sonar-scanner"
-                }
-            }
-        }
+        //    stage("SonarQube analysis") {
+        //     environment {
+        //         scannerHome = tool 'sonar-scanner'
+        //     }
+        //     steps {
+        //         withSonarQubeEnv("sonarqube") {
+        //             sh "${scannerHome}/bin/sonar-scanner"
+        //         }
+        //     }
+        // }
 
 
         //  stage("Quality Gate") {
