@@ -8,7 +8,7 @@
            }
         }
           environment {
-            PATH: "/opt/apache-maven-3.9.9/bin:$PATH"
+            PATH= "/opt/apache-maven-3.9.9/bin:$PATH"
           }
         stages {
            stage("source code check out") {
