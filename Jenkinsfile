@@ -110,32 +110,63 @@
         //     }
         // }
 
-           stage("Docker Build") {
+    //        stage("Docker Build") {
+    //         steps {
+    //             script {
+    //                 echo '<------------- Docker Build is Started ------------>'
+    //                 // sh "docker build -t ${Name}:${version} ."
+    //                 sh "docker build -t ${imageName}:${version} ."
+    //                 echo '<--------------- Docker Build Ends --------------->'
+    //             }
+    //         }
+    //     }
+
+    //                    }
+    // stage("Docker Publish") {
+    //         steps {
+    //             script {
+    //                 echo '<------------- Docker Publish Started ------------>'
+                    
+    //                 withCredentials([usernamePassword(credentialsId: 'jfrogcreds-id', usernameVariable: 'JFROG_USER', passwordVariable: 'JFROG_PASSWORD')]) {
+    //                     sh "docker login trialhbh694.jfrog.io -u ${JFROG_USER} -p ${JFROG_PASSWORD}"
+    //                      sh "docker tag ${imageName}:${version} trialhbh694.jfrog.io/${imageName}:${version}"
+    //                       "exclusions": [ "*.sha1", "*.md5"]
+    //                      sh "docker push trialhbh694.jfrog.io/${imageName}:${version}"
+    //                 }    
+
+    //                 echo '<------------- Docker Publish Ended ------------->'
+    //          }
+    //      }
+
+
+     stage("Docker Build") {
             steps {
                 script {
                     echo '<------------- Docker Build is Started ------------>'
-                    // sh "docker build -t ${Name}:${version} ."
-                    sh "docker build -t ${imageName}:${version} ."
+                    // Build the image locally as "ttrend:2.1.2"
+                    sh "docker build -t ttrend:2.1.2 ."
                     echo '<--------------- Docker Build Ends --------------->'
                 }
             }
         }
-
-           stage("Docker Publish") {
+        stage("Docker Publish") {
             steps {
                 script {
                     echo '<------------- Docker Publish Started ------------>'
-                    
+                    // Log in to the JFrog Docker registry using provided credentials
                     withCredentials([usernamePassword(credentialsId: 'jfrogcreds-id', usernameVariable: 'JFROG_USER', passwordVariable: 'JFROG_PASSWORD')]) {
                         sh "docker login trialhbh694.jfrog.io -u ${JFROG_USER} -p ${JFROG_PASSWORD}"
-                         sh "docker tag ${imageName}:${version} trialhbh694.jfrog.io/${imageName}:${version}"
-                         sh "docker push trialhbh694.jfrog.io/${imageName}:${version}"
-                    }    
-
-                    echo '<------------- Docker Publish Ended ------------->'
+                        // Tag the locally built image with the full JFrog registry name.
+                        sh "docker tag ttrend:2.1.2 trialhbh694.jfrog.io/ttrend:2.1.2"
+                        // Push the tagged image to JFrog Artifactory.
+                        sh "docker push trialhbh694.jfrog.io/ttrend:2.1.2"
+                    }
+                    echo '<------------- Docker Publish Ended ------------>'
                 }
-             }
-         }
+            }
+        }
+    }
+}
 
 
 
