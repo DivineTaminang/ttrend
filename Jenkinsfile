@@ -87,7 +87,7 @@
       }
 
         stage("Docker Build") {
-          echo '<------------- Docker Build is Started ------------>'
+          
             steps {
                 script {
                     app = docker.build(imageName + ":" + version)
