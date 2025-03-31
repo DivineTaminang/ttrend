@@ -115,7 +115,7 @@
                 script {
                     echo '<------------- Docker Build is Started ------------>'
                     // sh "docker build -t ${Name}:${version} ."
-                    sh "docker build -t ${Name}:${version}."
+                    sh "docker build -t ${Name}:${version} ."
                     echo '<--------------- Docker Build Ends --------------->'
                 }
             }
