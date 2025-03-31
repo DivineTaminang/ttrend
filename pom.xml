@@ -37,11 +37,11 @@
 	<version>1.99</version>
 		</dependency>
 		<!-- https://mvnrepository.com/artifact/org.twitter4j/twitter4j-core -->
-		<dependency>
+		<!-- <dependency>
 	<groupId>org.twitter4j</groupId>
 	<artifactId>twitter4j-core</artifactId>
 		<version>3.0.6</version>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>junit</groupId>
