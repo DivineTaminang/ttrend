@@ -87,28 +87,28 @@
         }
       }
 
-        // stage("Docker Build") {
-        //     steps {
-        //         script {
-        //             echo '<------------- Docker Build is Started ------------>'
-        //             // app = docker.build(imageName + ":" + version)
-        //             // app = sh 'docker build -t (imageName + ":" + version)
+        stage("Docker Build") {
+            steps {
+                script {
+                    echo '<------------- Docker Build is Started ------------>'
+                    // app = docker.build(imageName + ":" + version)
+                    // app = sh 'docker build -t (imageName + ":" + version)
 
-        //             echo '<--------------- Docker Build Ends --------------->'
-        //         }
-        //     }
-        // }
+                    echo '<--------------- Docker Build Ends --------------->'
+                }
+            }
+        }
       
-        // stage("Docker Published") {
-        //     steps {
-        //         script {
-        //             docker.withRegistry(registry, 'jfrogcreds-id') {
-        //                 app.push()
-        //             }
-        //             echo '<----------- Docker Publish Ended ---------------->'
-        //         }
-        //     }
-        // }
+        stage("Docker Published") {
+            steps {
+                script {
+                    docker.withRegistry(registry, 'jfrogcreds-id') {
+                        app.push()
+                    }
+                    echo '<----------- Docker Publish Ended ---------------->'
+                }
+            }
+        }
 
            stage("Docker Build") {
             steps {
@@ -122,23 +122,23 @@
         }
 
 
-    stage("Docker Publish") {
-            steps {
-                script {
-                    echo '<-------------- Docker Publish Started ------------>'
+  //   stage("Docker Publish") {
+  //           steps {
+  //               script {
+  //                   echo '<-------------- Docker Publish Started ------------>'
                     
-                    withCredentials([usernamePassword(credentialsId: 'jfrogcreds-id', usernameVariable: 'JFROG_USER', passwordVariable: 'JFROG_PASSWORD')]) {
-                        sh "docker login trialhbh694.jfrog.io -u ${JFROG_USER} -p ${JFROG_PASSWORD}"
-                         sh "docker tag ${imageName}:${version} trialhbh694.jfrog.io/${imageName}:${version}"
-                         sh "docker push trialhbh694.jfrog.io/${imageName}:${version}"
-                    }    
+  //                   withCredentials([usernamePassword(credentialsId: 'jfrogcreds-id', usernameVariable: 'JFROG_USER', passwordVariable: 'JFROG_PASSWORD')]) {
+  //                       sh "docker login trialhbh694.jfrog.io -u ${JFROG_USER} -p ${JFROG_PASSWORD}"
+  //                        sh "docker tag ${imageName}:${version} trialhbh694.jfrog.io/${imageName}:${version}"
+  //                        sh "docker push trialhbh694.jfrog.io/${imageName}:${version}"
+  //                   }    
 
-                    echo '<-------------- Docker Publish Ended ------------->'
-             }
-         }
-    }
-        }
-  }
+  //                   echo '<-------------- Docker Publish Ended ------------->'
+  //            }
+  //        }
+  //   }
+  //       }
+  // }
 //      stage("Docker Build") {
 //             steps {
 //                 script {
@@ -193,4 +193,4 @@
   //   }
   // }
   
-  
+  //]]
