@@ -11,18 +11,18 @@
             PATH= "/opt/apache-maven-3.9.9/bin:$PATH"
           }
         stages {
-           stage("source code check out") {
+          stage("source code check out") {
             steps {
               checkout scm   
             }
           }
-           stage("maven build") {
+          stage("maven build") {
             steps {
-             sh "mvn clean deploy"             
+            sh "mvn clean deploy"             
 
             }
           }
-           stage('unit test') {
+          stage('unit test') {
             steps {
                 echo "-------unit test started------"
                 sh 'mvn surefire-report:report'
@@ -60,13 +60,13 @@
         //       }
         //     }
         //   }
-           stage("Jar Publish") {
+        stage("Jar Publish") {
             steps {
-             script {
+            script {
                     echo '<--------------- Jar Publish Started --------------->'
-                     def server = Artifactory.newServer url:registry+"/artifactory" ,  credentialsId:"jfrogcreds-id"
-                     def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}";
-                     def uploadSpec = """{
+                    def server = Artifactory.newServer url:registry+"/artifactory" ,  credentialsId:"jfrogcreds-id"
+                    def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}";
+                    def uploadSpec = """{
                           "files": [
                             {
                               "pattern": "jarstaging/(*)",
@@ -75,22 +75,22 @@
                               "props" : "${properties}",
                               "exclusions": [ "*.sha1", "*.md5"]
                             }
-                         ]
-                     }"""
-                     def buildInfo = server.upload(uploadSpec)
-                     buildInfo.env.collect()
-                     server.publishBuildInfo(buildInfo)
-                     echo '<--------------- Jar Published Ended --------------->'  
+                        ]
+                    }"""
+                    def buildInfo = server.upload(uploadSpec)
+                    buildInfo.env.collect()
+                    server.publishBuildInfo(buildInfo)
+                    echo '<--------------- Jar Published Ended --------------->'  
             
-             }
+            }
         }
       }
 
         stage("Docker Build") {
+          echo '<------------- Docker Build is Started ------------>'
             steps {
                 script {
-                    echo '<------------- Docker Build is Started ------------>'
-                     app = docker.build(imageName + ":" + version)
+                    app = docker.build(imageName + ":" + version)
                     // app = sh 'docker build -t (imageName + ":" + version)
 
                     echo '<--------------- Docker Build Ends --------------->'
