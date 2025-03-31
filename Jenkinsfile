@@ -114,7 +114,8 @@
             steps {
                 script {
                     echo '<------------- Docker Build is Started ------------>'
-                    sh "docker build -t ${Name}:${version} ."
+                    // sh "docker build -t ${Name}:${version} ."
+                    sh "docker build -t ${Name}."
                     echo '<--------------- Docker Build Ends --------------->'
                 }
             }
@@ -129,8 +130,8 @@
                         sh "docker login trialhbh694.jfrog.io -u ${JFROG_USER} -p ${JFROG_PASSWORD}"
                         //sh "docker tag ${imageName}:${version} trialhbh694.jfrog.io/${imageName}:${version}"
                         sh "docker tag ${Name}:${version}"
-                        sh "docker push ${Name}:${version}"
-                    }
+                        // sh "docker push trialhbh694.jfrog.io/${imageName}:${version}"
+                    }      sh "docker push ${Name}:${version}"
 
                     echo '<------------- Docker Publish Ended ------------->'
                 }
