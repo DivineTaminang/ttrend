@@ -1,7 +1,5 @@
   def registry = 'https://trialhbh694.jfrog.io'
-  def registrys = 'https://trialhbh694.jfrog.io/mavine-docker-local'
-  def imageDir = 'mavine-docker-local'
-  def Name = 'ttrend'
+  def imageName = 'mavine-docker-local/ttrend'
   def version = '2.1.2'
   pipeline {
         agent {
@@ -93,7 +91,7 @@
             steps {
                 script {
                     echo '<------------- Docker Build is Started ------------>'
-                    app = docker.build(Name + ":" + version)
+                    app = docker.build(imageName + ":" + version)
                     // app = sh 'docker build -t (imageName + ":" + version)
 
                     echo '<--------------- Docker Build Ends --------------->'
@@ -104,7 +102,7 @@
         stage("Docker Published") {
             steps {
                 script {
-                    docker.withRegistry(registrys, 'jfrogcreds-id') {
+                    docker.withRegistry(registry, 'jfrogcreds-id') {
                         app.push()
                     }
                     echo '<----------- Docker Publish Ended ---------------->'
