@@ -1,6 +1,13 @@
-FROM openjdk:8
-COPY target/demo-workshop-2.1.2.jar ttrend.jar
-ENTRYPOINT ["java", "-jar", "ttrend.jar"]
+FROM openjdk:17
+WORKDIR /app
+COPY target/demo-workshop-2.1.2.jar /app/ttrend.jar
+CMD ["java", "-jar", "/app/ttrend.jar"]
+
+
+
+# FROM openjdk:8
+# COPY target/demo-workshop-2.1.2.jar ttrend.jar
+# ENTRYPOINT ["java", "-jar", "ttrend.jar"]
 
 
 
