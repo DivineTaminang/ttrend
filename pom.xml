@@ -17,7 +17,7 @@
 
 	<properties>
 		<java.version>1.8</java.version>
-		 <maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
+		<maven-jar-plugin.version>3.1.1</maven-jar-plugin.version>
 	</properties>
 
 	<dependencies>
@@ -32,15 +32,15 @@
 
 		<!-- https://mvnrepository.com/artifact/org.kohsuke/github-api -->
 		<dependency>
-		    <groupId>org.kohsuke</groupId>
-		    <artifactId>github-api</artifactId>
-		    <version>1.99</version>
+	<groupId>org.kohsuke</groupId>
+	<artifactId>github-api</artifactId>
+	<version>1.99</version>
 		</dependency>
-		 <!-- https://mvnrepository.com/artifact/org.twitter4j/twitter4j-core -->
+		<!-- https://mvnrepository.com/artifact/org.twitter4j/twitter4j-core -->
 		<dependency>
-		    <groupId>org.twitter4j</groupId>
-		    <artifactId>twitter4j-core</artifactId>
-		    <version>3.0.6</version>
+	<groupId>org.twitter4j</groupId>
+	<artifactId>twitter4j-core</artifactId>
+		<version>3.0.6</version>
 		</dependency>
 
 		<dependency>
@@ -83,15 +83,15 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-                   <mainClass>com.valaxy.demo.WorkshopApplication</mainClass>
-            </configuration>
-		  </plugin>
+                <mainClass>com.valaxy.demo.WorkshopApplication</mainClass>
+                </configuration>
+		</plugin>
 
-         <plugin>
+        <plugin>
                 <groupId>org.sonarsource.scanner.maven</groupId>
                 <artifactId>sonar-maven-plugin</artifactId>
                 <version>4.0.0.4121</version>
-          </plugin>
+        </plugin>
 			
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
