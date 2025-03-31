@@ -125,7 +125,7 @@
     stage("Docker Publish") {
             steps {
                 script {
-                    echo '<------------- Docker Publish Started ------------>'
+                    echo '<-------------- Docker Publish Started ------------>'
                     
                     withCredentials([usernamePassword(credentialsId: 'jfrogcreds-id', usernameVariable: 'JFROG_USER', passwordVariable: 'JFROG_PASSWORD')]) {
                         sh "docker login trialhbh694.jfrog.io -u ${JFROG_USER} -p ${JFROG_PASSWORD}"
@@ -133,7 +133,7 @@
                          sh "docker push trialhbh694.jfrog.io/${imageName}:${version}"
                     }    
 
-                    echo '<------------- Docker Publish Ended ------------->'
+                    echo '<-------------- Docker Publish Ended ------------->'
              }
          }
     }
