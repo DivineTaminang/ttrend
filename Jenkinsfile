@@ -92,9 +92,9 @@
                   echo '<------------- Docker Build is Started ------------>'
 
             // Remove the previously built image before building a new one
-                  sh "docker rmi -f ${imageName}:${version} || true"
-                  echo "Waiting for 5 seconds before running the application..."
-                  sh 'sleep 5'
+                  // sh "docker rmi -f ${imageName}:${version} || true"
+                  // echo "Waiting for 5 seconds before running the application..."
+                  // sh 'sleep 5'
                 // Build the new image
                   app = docker.build(imageName + ":" + version)
 
