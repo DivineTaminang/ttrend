@@ -60,9 +60,9 @@
         //       }
         //     }
         //   }
-        stage("Jar Publish") {
+          stage("Jar Publish") {
             steps {
-            script {
+              script {
                     echo '<--------------- Jar Publish Started --------------->'
                     def server = Artifactory.newServer url:registry+"/artifactory" ,  credentialsId:"jfrogcreds-id"
                     def properties = "buildid=${env.BUILD_ID},commitid=${GIT_COMMIT}";
@@ -86,23 +86,23 @@
         }
       }
 
-        stage("Docker Build") {
-          steps {
-            script {
-            echo '<------------- Docker Build is Started ------------>'
+            stage("Docker Build") {
+              steps {
+                script {
+                  echo '<------------- Docker Build is Started ------------>'
 
             // Remove the previously built image before building a new one
-            sh "docker rmi -f ${imageName}:${version} || true"
-            echo "Waiting for 5 seconds before running the application..."
-            sh 'sleep 5'
-            // Build the new image
-            app = docker.build(imageName + ":" + version)
+                  sh "docker rmi -f ${imageName}:${version} || true"
+                  echo "Waiting for 5 seconds before running the application..."
+                  sh 'sleep 5'
+                // Build the new image
+                  app = docker.build(imageName + ":" + version)
 
             echo '<--------------- Docker Build Ends --------------->'
         }
 
-        stage("Docker Published") {
-            steps {
+            stage("Docker Published") {
+              steps {
                 script {
                     docker.withRegistry(registry, 'jfrogcreds-id') {
                         app.push()
@@ -112,13 +112,14 @@
             }
         }
     
-        stage("Application Build") {
-          steps {
-            script {
+            stage("Application Build") {
+              steps {
+                script {
+            echo '<----------- started ---------------->'
             echo "Waiting for 5 seconds before running the application..."
-            sh 'sleep 5'
-            sh 'docker run -it --name ttrend -p 8000:8000 ${imageName}:${version}'
-            echo '<----------- Application Started ---------------->'
+                sh 'sleep 5'
+                sh 'docker run -it --name ttrend -p 8000:8000 ${imageName}:${version}'
+            echo '<----------- ended Started ---------------->'
         }
     }
 }
