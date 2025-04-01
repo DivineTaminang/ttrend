@@ -91,7 +91,7 @@
             steps {
                 script {
                     echo '<------------- Docker Build is Started ------------>'
-                    app = docker.build(imageName + ":" + version)
+                    app = docker.build(imageName + ":" + version, .)
                     // app = sh 'docker build -t (imageName + ":" + version)
 
                     echo '<--------------- Docker Build Ends --------------->'
