@@ -92,9 +92,9 @@
                   echo '<------------- Docker Build is Started ------------>'
 
             // Remove the previously built image before building a new one
-                  // sh "docker rmi -f ${imageName}:${version} || true"
-                  // echo "Waiting for 5 seconds before running the application..."
-                  // sh 'sleep 5'
+                  sh "docker rmi -f mavine-docker-local/ttrend:2.1.2"
+                  echo "Waiting for 5 seconds before running the application..."
+                  sh 'sleep 5'
                 // Build the new image
                   app = docker.build(imageName + ":" + version)
 
@@ -119,7 +119,8 @@
             echo '<----------- started ---------------->'
             echo "Waiting for 5 seconds before running the application..."
                 sh 'sleep 5'
-                sh 'docker run -it --name ttrend -p 8000:8000 ${imageName}:${version}'
+                sh 'docker run -it --name ttrend -p 8000:8000 mavine-docker-local/ttrend:2.1.2'
+                  //  ${imageName}:${version}'
             echo '<----------- ended Started ---------------->'
         }
     }
