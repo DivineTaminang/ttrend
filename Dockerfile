@@ -1,6 +1,6 @@
 FROM openjdk:17
 WORKDIR /app
-COPY jarstaging/com/valaxy/demo-workshop/2.1.2 ttrend.jar
+COPY jarstaging/com/valaxy/demo-workshop/2.1.2/demo-workshop-2.1.2.jar ttrend.jar
 ENTRYPOINT ["java", "-jar", "ttrend.jar"]
 
 # ~/jenkins/workspace/multibranch-pipeline_main/target/demo-workshop-2.1.2.jar
