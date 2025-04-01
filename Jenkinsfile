@@ -3,9 +3,9 @@
   def version = '2.1.2'
   pipeline {
         agent {
-           node {
-               label 'slave-server' 
-           }
+          node {
+              label 'slave-server' 
+          }
         }
           environment {
             PATH= "/opt/apache-maven-3.9.9/bin:$PATH"
@@ -87,18 +87,20 @@
       }
 
         stage("Docker Build") {
-          
-            steps {
-                script {
-                    echo '<------------- Docker Build is Started ------------>'
-                    app = docker.build(imageName + ":" + version, ".")
-                    // app = sh 'docker build -t (imageName + ":" + version)
+          steps {
+            script {
+            echo '<------------- Docker Build is Started ------------>'
 
-                    echo '<--------------- Docker Build Ends --------------->'
-                }
-            }
+            // Remove the previously built image before building a new one
+            sh "docker rmi -f ${imageName}:${version} || true"
+            echo "Waiting for 5 seconds before running the application..."
+            sh 'sleep 5'
+            // Build the new image
+            app = docker.build(imageName + ":" + version)
+
+            echo '<--------------- Docker Build Ends --------------->'
         }
-      
+
         stage("Docker Published") {
             steps {
                 script {
@@ -109,6 +111,99 @@
                 }
             }
         }
+    
+        stage("Application Build") {
+          steps {
+            script {
+            echo "Waiting for 5 seconds before running the application..."
+            sh 'sleep 5'
+            sh 'docker run -it --name ttrend -p 8000:8000 ${imageName}:${version}'
+            echo '<----------- Application Started ---------------->'
+        }
+    }
+}
+
+
+
+        // stage("Docker Build") {
+          
+        //     steps {
+        //         script {
+        //             echo '<------------- Docker Build is Started ------------>'
+        //             app = docker.build(imageName + ":" + version, ".")
+        //             // app = sh 'docker build -t (imageName + ":" + version)
+
+        //             echo '<--------------- Docker Build Ends --------------->'
+        //         }
+        //     }
+        // }
+
+        
+        // stage("Application Build") {
+        //     steps {
+        //         script {
+        //             sh 'docker run -it --name ttrend -p 8000:8000 ${imageName}:${version}'
+        //             echo '<----------- Docker Publish Ended ---------------->'
+        //         }
+        //     }
+        // }
+      
+//         stage("Docker Published") {
+//             steps {
+//                 script {
+//                     docker.withRegistry(registry, 'jfrogcreds-id') {
+//                         app.push()
+//                     }
+//                     echo '<----------- Docker Publish Ended ---------------->'
+//                 }
+//             }
+//         }
+
+//         stage("Application Build") {
+//             steps {
+//                 script {
+//                     sh 'docker run -it --name ttrend -p 8000:8000 ${imageName}:${version}'
+//                     echo '<----------- Docker Publish Ended ---------------->'
+//                 }
+//             }
+//         }
+
+
+
+//         stage("Docker Build") {
+//             steps {
+//                 script {
+//                     echo '<------------- Docker Build is Started ------------>'
+
+//             // Remove the previously built image before building a new one
+//                     sh "docker rmi -f ${imageName}:${version} || true"
+
+//             // Build the new image
+//               app = docker.build(imageName + ":" + version)
+
+//             echo '<--------------- Docker Build Ends --------------->'
+//         }
+//     }
+// }
+//         stage("Application Build") {
+//           steps {
+//             script {
+//             echo "Waiting for 5 seconds before running the application..."
+//             sh 'sleep 5'
+//             sh 'docker run -it --name ttrend -p 8000:8000 ${imageName}:${version}'
+//             echo '<----------- Application Started ---------------->'
+//         }
+//     }
+// }
+
+
+
+
+
+
+
+
+
 
           //  stage("Docker Build") {
           //   steps {
@@ -193,3 +288,6 @@
   //   }
 }
   }
+        }
+  }
+  
