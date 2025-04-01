@@ -100,7 +100,8 @@
 
             echo '<--------------- Docker Build Ends --------------->'
         }
-
+              }
+            }
             stage("Docker Published") {
               steps {
                 script {
