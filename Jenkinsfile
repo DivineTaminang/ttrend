@@ -113,18 +113,18 @@
             }
         }
     
-            stage("Application Build") {
-              steps {
-                script {
-            echo '<----------- started ---------------->'
-            echo "Waiting for 5 seconds before running the application..."
-                sh 'sleep 5'
-                sh 'docker run -it --name ttrend -p 8000:8000 mavine-docker-local/ttrend:2.1.2'
-                  //  ${imageName}:${version}'
-            echo '<----------- ended Started ---------------->'
-        }
-    }
-}
+//             stage("Application Build") {
+//               steps {
+//                 script {
+//             echo '<----------- started ---------------->'
+//             echo "Waiting for 5 seconds before running the application..."
+//                 sh 'sleep 5'
+//                 sh 'docker run -it --name ttrend -p 8000:8000 mavine-docker-local/ttrend:2.1.2'
+//                   //  ${imageName}:${version}'
+//             echo '<----------- ended Started ---------------->'
+//         }
+//     }
+// }
 
 
 
