@@ -112,141 +112,7 @@
                 }
             }
         }
-    
-//             stage("Application Build") {
-//               steps {
-//                 script {
-//             echo '<----------- started ---------------->'
-//             echo "Waiting for 5 seconds before running the application..."
-//                 sh 'sleep 5'
-//                 sh 'docker run -it --name ttrend -p 8000:8000 mavine-docker-local/ttrend:2.1.2'
-//                   //  ${imageName}:${version}'
-//             echo '<----------- ended Started ---------------->'
-//         }
-//     }
-// }
-
-
-
-        // stage("Docker Build") {
-          
-        //     steps {
-        //         script {
-        //             echo '<------------- Docker Build is Started ------------>'
-        //             app = docker.build(imageName + ":" + version, ".")
-        //             // app = sh 'docker build -t (imageName + ":" + version)
-
-        //             echo '<--------------- Docker Build Ends --------------->'
-        //         }
-        //     }
-        // }
-
-        
-        // stage("Application Build") {
-        //     steps {
-        //         script {
-        //             sh 'docker run -it --name ttrend -p 8000:8000 ${imageName}:${version}'
-        //             echo '<----------- Docker Publish Ended ---------------->'
-        //         }
-        //     }
-        // }
-      
-//         stage("Docker Published") {
-//             steps {
-//                 script {
-//                     docker.withRegistry(registry, 'jfrogcreds-id') {
-//                         app.push()
-//                     }
-//                     echo '<----------- Docker Publish Ended ---------------->'
-//                 }
-//             }
-//         }
-
-//         stage("Application Build") {
-//             steps {
-//                 script {
-//                     sh 'docker run -it --name ttrend -p 8000:8000 ${imageName}:${version}'
-//                     echo '<----------- Docker Publish Ended ---------------->'
-//                 }
-//             }
-//         }
-
-
-
-//         stage("Docker Build") {
-//             steps {
-//                 script {
-//                     echo '<------------- Docker Build is Started ------------>'
-
-//             // Remove the previously built image before building a new one
-//                     sh "docker rmi -f ${imageName}:${version} || true"
-
-//             // Build the new image
-//               app = docker.build(imageName + ":" + version)
-
-//             echo '<--------------- Docker Build Ends --------------->'
-//         }
-//     }
-// }
-//         stage("Application Build") {
-//           steps {
-//             script {
-//             echo "Waiting for 5 seconds before running the application..."
-//             sh 'sleep 5'
-//             sh 'docker run -it --name ttrend -p 8000:8000 ${imageName}:${version}'
-//             echo '<----------- Application Started ---------------->'
-//         }
-//     }
-// }
-
-
-
-
-
-
-
-
-
-
-          //  stage("Docker Build") {
-          //   steps {
-          //       script {
-          //           echo '<------------- Docker Build is Started ------------>'
-          //           // sh "docker build -t ${Name}:${version} ."
-          //           sh "docker build -t ${imageName}:${version} ."
-          //           echo '<--------------- Docker Build Ends --------------->'
-          //       }
-          //   }
-          // }
-
-
-  //   stage("Docker Publish") {
-  //           steps {
-  //               script {
-  //                   echo '<-------------- Docker Publish Started ------------>'
-                    
-  //                   withCredentials([usernamePassword(credentialsId: 'jfrogcreds-id', usernameVariable: 'JFROG_USER', passwordVariable: 'JFROG_PASSWORD')]) {
-  //                       sh "docker login trialhbh694.jfrog.io -u ${JFROG_USER} -p ${JFROG_PASSWORD}"
-  //                        sh "docker tag ${imageName}:${version} trialhbh694.jfrog.io/${imageName}:${version}"
-  //                        sh "docker push trialhbh694.jfrog.io/${imageName}:${version}"
-  //                   }    
-
-  //                   echo '<-------------- Docker Publish Ended ------------->'
-  //            }
-  //        }
-  //   }
-  //       }
-  // }
-//      stage("Docker Build") {
-//             steps {
-//                 script {
-//                     echo '<------------- Docker Build is Started ------------>'
-//                     // Build the image locally as "ttrend:2.1.2"
-//                     sh "docker build -t ttrend:2.1.2 ."
-//                     echo '<--------------- Docker Build Ends --------------->'
-//                 }
-//             }
-//         }
+  
 //         stage("Docker Publish") {
 //             steps {
 //                 script {
@@ -267,17 +133,15 @@
 // }
 
 
-
-
-        // stage("Kubernetes Deploy") {
-        //     steps {
-        //         script {
-        //             echo '< ------------Kubernetes deploy started ----------------->'
-        //             sh './deploy.sh'
-        //             echo '< -------------Kubernetes deploy ended ------------------->'
-        //         }
-        //     }
-        // }
+        stage("Kubernetes Deploy") {
+            steps {
+                script {
+                    echo '< ------------Kubernetes deploy started ----------------->'
+                    sh './deploy.sh'
+                    echo '< -------------Kubernetes deploy ended ------------------->'
+                }
+            }
+        }
 
         // stage("Deploy") {
         //     steps {
