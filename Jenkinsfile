@@ -137,6 +137,7 @@
             steps {
                 script {
                     echo '< ------------Kubernetes deploy started ----------------->'
+                    sh 'chmod a+rx ./deploy.sh'
                     sh './deploy.sh'
                     echo '< -------------Kubernetes deploy ended ------------------->'
                 }
