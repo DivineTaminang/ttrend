@@ -133,31 +133,31 @@
 // }
 
 
-        stage("Kubernetes Deploy") {
-            steps {
-                script {
-                    echo '< ------------Kubernetes deploy started ----------------->'
-                    //Give read and execute permission to all
-                    sh 'chmod a+rx ./deploy.sh'
-                    // Deploy
-                    sh './deploy.sh'
-                    echo '< -------------Kubernetes deploy ended ------------------->'
-                }
-            }
-        }
-
-        // stage("Deploy") {
+        // stage("Kubernetes Deploy") {
         //     steps {
         //         script {
-        //             echo '< ------------Helm deploy started ----------------->'
-        //             sh 'helm install ttrend ttrend-0.1.0.tgz'
-        //             echo '< -------------Helm deploy ended -------------------->'
+        //             echo '< ------------Kubernetes deploy started ----------------->'
+        //             //Give read and execute permission to all
+        //             sh 'chmod a+rx ./deploy.sh'
+        //             // Deploy
+        //             sh './deploy.sh'
+        //             echo '< -------------Kubernetes deploy ended ------------------->'
         //         }
-        //   }
+        //     }
         // }
-  //   }
+
+        stage("Deploy") {
+            steps {
+                script {
+                    echo '< ------------Helm deploy started ----------------->'
+                    sh 'helm install ttrend-v2 ttrend-0.1.0.tgz'
+                    echo '< -------------Helm deploy ended -------------------->'
+                }
+          }
+        }
+    }
 }
-  }
+
         
   
   
