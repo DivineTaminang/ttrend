@@ -137,7 +137,9 @@
             steps {
                 script {
                     echo '< ------------Kubernetes deploy started ----------------->'
+                    //Give read and execute permission to all
                     sh 'chmod a+rx ./deploy.sh'
+                    // Deploy
                     sh './deploy.sh'
                     echo '< -------------Kubernetes deploy ended ------------------->'
                 }
